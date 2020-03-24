@@ -1,3 +1,5 @@
+import 'package:fast_jobs/shared/utils/bottom_navy_bar.dart';
+import 'package:fast_jobs/shared/widgets/icon.dart';
 import 'package:fast_jobs/views/dashboard/history/histories.dart';
 import 'package:fast_jobs/views/dashboard/home/home.dart';
 import 'package:fast_jobs/views/dashboard/post/posts.dart';
@@ -27,13 +29,8 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final _widgetOptions = [
-    Home(),
-    Histories(),
-    Posts(),
-    Profile()
-  ];
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  final _widgetOptions = [Home(), Histories(), Posts(), Profile()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -41,38 +38,61 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     });
   }
 
+//  activeIcon: IconCustom.icon('assets/images/dashboard/menu/home_unselect.png', 20 , 20),
+//  icon: Image.asset(
+//  'assets/images/dashboard/menu/home_unselect.png',
+//  height: 20,
+//  width: 20,
+//  ),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('History'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('Post'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('Profile'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
-    );
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavyBar(
+          selectedIndex: _selectedIndex,
+          onItemSelected: _onItemTapped,
+          items: [
+            BottomNavyBarItem(
+              icon: IconCustom.icon(
+                  'assets/images/dashboard/menu/home_unselect.png', 18, 18),
+              activeIcon: IconCustom.icon(
+                  'assets/images/dashboard/menu/home_selected.png', 18, 18),
+              title: Text('Home'),
+              activeColor: Colors.white,
+              containerColor: Color(0xff34a3af),
+              textAlign: TextAlign.center,
+            ),
+            BottomNavyBarItem(
+              icon: IconCustom.icon(
+                  'assets/images/dashboard/menu/history_unselect.png', 18, 20),
+              activeIcon: IconCustom.icon(
+                  'assets/images/dashboard/menu/history_selected.png', 18, 20),
+              title: Text('History'),
+              activeColor: Colors.white,
+              containerColor: Color(0xff34a3af),
+              textAlign: TextAlign.center,
+            ),
+            BottomNavyBarItem(
+              icon: IconCustom.icon(
+                  'assets/images/dashboard/menu/post_unselect.png', 19, 18),
+              activeIcon: IconCustom.icon(
+                  'assets/images/dashboard/menu/post_selected.png', 19, 18),
+              title: Text('Post'),
+              activeColor: Colors.white,
+              containerColor: Color(0xff34a3af),
+              textAlign: TextAlign.center,
+            ),
+            BottomNavyBarItem(
+              icon: IconCustom.icon(
+                  'assets/images/dashboard/menu/account_unselect.png', 17, 18),
+              activeIcon: IconCustom.icon(
+                  'assets/images/dashboard/menu/account_selected.png', 17, 18),
+              title: Text('Account'),
+              activeColor: Colors.white,
+              containerColor: Color(0xff34a3af),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ));
   }
 }
