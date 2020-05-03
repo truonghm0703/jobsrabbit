@@ -81,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
       double widthIcon,
       bool isPassword = false,
       TextEditingController controller}) {
+    List<Icon> list = [];
     return Container(
       height: 50,
       child: Column(
@@ -97,6 +98,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextField(
                     controller: controller,
                     obscureText: isPassword,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                         border: InputBorder.none,
@@ -104,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                         hintText: title,
                         hintStyle: TextStyle(color: Colors.white))),
-              )
+              ),
             ],
           ),
           Container(
@@ -276,10 +279,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _doLogin(String email, String password, BuildContext context) {
-    Navigator.push(context,
-            MaterialPageRoute(builder: (BuildContext context) {
-              return TabBarController();
-      }));
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return TabBarController();
+    }));
     return;
     Dio _dio = new Dio();
 
