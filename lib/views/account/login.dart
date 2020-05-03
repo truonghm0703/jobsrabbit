@@ -81,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
       double widthIcon,
       bool isPassword = false,
       TextEditingController controller}) {
-    List<Icon> list = [];
     return Container(
       height: 50,
       child: Column(
