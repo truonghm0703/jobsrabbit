@@ -44,6 +44,7 @@ flutter:
     - assets/images/login/
     - assets/images/dashboard/menu/
     - assets/images/dashboard/home/
+    - assets/images/dashboard/profile/
 
   #  - images/a_dot_ham.jpeg
 
