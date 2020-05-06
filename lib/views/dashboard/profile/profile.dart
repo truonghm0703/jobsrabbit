@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'notifications.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -109,7 +110,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 ),
                 InkWell(
                   onTap: () {
-                    print("tap");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Notifications()),
+                    );
                   },
                   child: Container(
                     alignment: Alignment.center,
