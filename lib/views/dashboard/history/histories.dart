@@ -12,10 +12,10 @@ class Histories extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: <Widget>[
-            _headerView(
+            HistoryHeader(
               widthButton: width / 2,
             ),
-            _contentView(),
+            HistoryContent(),
           ],
         ),
       ),
@@ -24,18 +24,18 @@ class Histories extends StatelessWidget {
 }
 
 // ignore: camel_case_types
-class _headerView extends StatefulWidget {
+class HistoryHeader extends StatefulWidget {
   final double widthButton;
   int indexSelect = 0;
 
-  _headerView({this.widthButton});
+  HistoryHeader({this.widthButton});
 
   @override
-  __headerViewState createState() => __headerViewState();
+  _HistoryHeaderState createState() => _HistoryHeaderState();
 }
 
 // ignore: camel_case_types
-class __headerViewState extends State<_headerView> {
+class _HistoryHeaderState extends State<HistoryHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -151,13 +151,13 @@ class __headerViewState extends State<_headerView> {
 }
 
 // ignore: camel_case_types
-class _contentView extends StatefulWidget {
+class HistoryContent extends StatefulWidget {
   @override
-  __contentViewState createState() => __contentViewState();
+  _HistoryContentState createState() => _HistoryContentState();
 }
 
 // ignore: camel_case_types
-class __contentViewState extends State<_contentView> {
+class _HistoryContentState extends State<HistoryContent> {
   @override
   Widget build(BuildContext context) {
     return Expanded(

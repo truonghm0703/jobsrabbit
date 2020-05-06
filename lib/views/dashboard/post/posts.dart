@@ -11,7 +11,7 @@ class Posts extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: <Widget>[
-            _headerView(
+            PostHeader(
               widthButton: width / 2,
             ),
             //_contentView(),
@@ -23,18 +23,18 @@ class Posts extends StatelessWidget {
 }
 
 // ignore: camel_case_types, must_be_immutable
-class _headerView extends StatefulWidget {
+class PostHeader extends StatefulWidget {
   final double widthButton;
   int indexSelect = 0;
 
-  _headerView({this.widthButton});
+  PostHeader({this.widthButton});
 
   @override
-  __headerViewState createState() => __headerViewState();
+  _PostHeaderState createState() => _PostHeaderState();
 }
 
 // ignore: camel_case_types
-class __headerViewState extends State<_headerView> {
+class _PostHeaderState extends State<PostHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
