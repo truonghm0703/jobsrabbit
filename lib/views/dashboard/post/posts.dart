@@ -1,3 +1,5 @@
+import 'package:fast_jobs/views/dashboard/post/posting.dart';
+import 'package:fast_jobs/views/dashboard/post/your_post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class Posts extends StatelessWidget {
             PostHeader(
               widthButton: width / 2,
             ),
-            //_contentView(),
+            PostContentView()
           ],
         ),
       ),
@@ -144,6 +146,34 @@ class _PostHeaderState extends State<PostHeader> {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class PostContentView extends StatefulWidget {
+  final double width;
+  PostContentView({this.width});
+  @override
+  _PostContentViewState createState() => _PostContentViewState();
+}
+
+class _PostContentViewState extends State<PostContentView> {
+  final PageController pageController = PageController(
+    initialPage: 0,
+  );
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        width: widget.width,
+        child: PageView(
+          controller: pageController,
+          children: <Widget>[
+            Posting(),
+            YourPost(),
+          ],
+        ),
       ),
     );
   }

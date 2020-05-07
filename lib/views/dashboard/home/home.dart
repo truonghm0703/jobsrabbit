@@ -7,14 +7,17 @@ class Home extends StatelessWidget {
       color: Colors.white54,
       child: Stack(
         children: <Widget>[
-          _headerView(),
-          _contentView(MediaQuery.of(context).size.width),
+          HomeHeaderView(),
+          HomeContentView(width: MediaQuery.of(context).size.width),
         ],
       ),
     );
   }
+}
 
-  Widget _headerView() {
+class HomeHeaderView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     final List<String> buttons = [
       "Nails",
       "Babysitting",
@@ -146,8 +149,20 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _contentView(double width) {
+class HomeContentView extends StatefulWidget {
+  final double width;
+
+  HomeContentView({this.width});
+
+  @override
+  _HomeContentViewState createState() => _HomeContentViewState();
+}
+
+class _HomeContentViewState extends State<HomeContentView> {
+  @override
+  Widget build(BuildContext context) {
     final List<String> buttons = [
       "Nails",
       "Babysitting",
@@ -162,18 +177,23 @@ class Home extends StatelessWidget {
       "Shipper",
       "Worker"
     ];
+    final double padding = (widget.width <= 375 ? 5.0 : 14.0);
+    final double spacing = (widget.width <= 375 ? 5.0 : 13.0);
+    print(widget.width);
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 185.0, left: 14.0, right: 14.0),
+        padding: EdgeInsets.only(top: 185.0, left: padding, right: padding),
         child: Container(
-          width: width,
+          width: widget.width,
           color: Colors.transparent,
           child: GridView.builder(
             itemCount: buttons.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 13.0,
-                mainAxisSpacing: 15.0),
+              crossAxisCount: 2,
+              crossAxisSpacing: spacing,
+              mainAxisSpacing: spacing,
+              childAspectRatio: widget.width <= 375 ? (widget.width < 375 ? 0.8 : 0.93 ) : widget.width / 414,
+            ),
             itemBuilder: (BuildContext context, int index) {
               return _itemJobBuilder();
             },
@@ -184,125 +204,132 @@ class Home extends StatelessWidget {
   }
 
   Widget _itemJobBuilder() {
-    return Card(
-      elevation: 5.0,
-      borderOnForeground: true,
-      color: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 15.0,left: 15.0, top: 24.0, bottom: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "Nails Job",
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                ),
-                maxLines: 1,
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              Text(
-                "SE 97220",
-                style: TextStyle(
+    final double padding = (widget.width <= 375 ? 8.0 : 14.0);
+    return Container(
+      height: 10,
+      child: Card(
+        elevation: 5.0,
+        borderOnForeground: true,
+        color: Colors.transparent,
+        child: Container(
+          height: 1000,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          child: Padding(
+            padding: EdgeInsets.only(
+                right: padding, left: padding, top: 24.0, bottom: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Nails Job",
+                  style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                    color: Color(0x00ff0093ca)),
-                maxLines: 1,
-              ),
-              SizedBox(
-                height: 27,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/dashboard/home/ic_candidate.png',
-                        width: 14,
-                        height: 14,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "10",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            color: Color(0x00ff494949)),
-                        maxLines: 1,
-                      ),
-                    ],
+                    fontSize: 20,
                   ),
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/dashboard/home/ic_usd.png',
-                        width: 6,
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      Text(
-                        "DEAL",
-                        style: TextStyle(
+                  maxLines: 1,
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  "SE 97220",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Color(0x00ff0093ca)),
+                  maxLines: 1,
+                ),
+                SizedBox(
+                  height: 27,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/dashboard/home/ic_candidate.png',
+                          width: 14,
+                          height: 14,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "10",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              color: Color(0x00ff494949)),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/dashboard/home/ic_usd.png',
+                          width: 6,
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text(
+                          "DEAL",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Color(0x00ff455962)),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 17,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () {
+                        print("tap");
+                      },
+                      child: Container(
+                        height: 21,
+                        width: 54,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.5)),
+                            border: Border.all(color: Color(0x00ff34a3af))),
+                        child: Text(
+                          "Save",
+                          style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: Color(0x00ff455962)),
-                        maxLines: 1,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 17,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      print("tap");
-                    },
-                    child: Container(
-                      height: 21,
-                      width: 54,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10.5)),
-                          border: Border.all(color: Color(0x00ff34a3af))),
-                      child: Text(
-                        "Save",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 11,
-                          color: Color(0x00ff34a3af),
+                            fontSize: 11,
+                            color: Color(0x00ff34a3af),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "2 days ago",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 10,
-                      color: Color(0x00ff9d9d9d),
+                    Text(
+                      "2 days ago",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10,
+                        color: Color(0x00ff9d9d9d),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
