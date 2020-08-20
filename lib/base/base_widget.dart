@@ -14,7 +14,7 @@ class PageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: title == "" ? null : AppBar(
         title: Text(
           title,
           style: TextStyle(color: AppColor.blue),
