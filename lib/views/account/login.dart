@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:fast_jobs/shared/widgets/icon.dart';
-import 'package:fast_jobs/views/dashboard/tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -278,9 +277,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _doLogin(String email, String password, BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return TabBarController();
-    }));
+//    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+//      return TabBarController();
+//    }));
     return;
     Dio _dio = new Dio();
 
