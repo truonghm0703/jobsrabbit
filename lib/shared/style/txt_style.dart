@@ -5,4 +5,8 @@ class TxtStyle {
   static TextStyle normal() {
     return TextStyle(fontSize: 15, color: AppColor.blue);
   }
+
+  static TextStyle signInHeader() {
+    return TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.w200);
+  }
 }

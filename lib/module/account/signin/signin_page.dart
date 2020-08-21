@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:fast_jobs/base/base_widget.dart';
+import 'package:fast_jobs/data/remote/user_service.dart';
+import 'package:fast_jobs/data/repo/user_repo.dart';
+import 'package:fast_jobs/module/account/signin/signin_bloc.dart';
+import 'package:fast_jobs/module/account/signin/signin_header.dart';
 import 'package:fast_jobs/shared/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +16,15 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return PageContainer(
-      di: [],
+      di: [
+        Provider.value(
+          value: UserService(),
+        ),
+        ProxyProvider<UserService, UserRepo>(
+          update: (context, userService, previous) =>
+              UserRepo(userService: userService),
+        ),
+      ],
       bloc: [],
       child: FormHolder(),
       title: "",
@@ -23,11 +35,21 @@ class SignInPage extends StatelessWidget {
 class FormHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        ViewBottom(),
-        ViewTop(),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => SignInBloc(userRepo: Provider.of(context)),
+      child: Consumer<SignInBloc>(
+        builder: (context, bloc, child) => SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: <Widget>[
+                  ViewTop(bloc: bloc,),
+                ],
+              ),
+            )
+        ),
+      ),
     );
   }
 }
@@ -49,68 +71,38 @@ class ViewBottom extends StatelessWidget {
   }
 }
 
-class HeaderView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: SizeConfig.screenWidth,
-        padding: EdgeInsets.symmetric(vertical: 32, horizontal: 32),
-        child: Row(
-          children: <Widget>[
-            Image.asset('assets/images/login/logo_white.png',
-                width: 32, height: 39),
-            Spacer(),
-            _buttonSelected("SignIn", true, (){
-
-            }),
-            _buttonSelected("SignUp", false, (){
-
-            })
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buttonSelected(String title,bool isSelect, Function press) {
-    return InkWell(
-      onTap: press,
-      child: Container(
-        height: 32,
-        padding: EdgeInsets.only(left: 30),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                title,
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: isSelect ? FontWeight.w600 : FontWeight.w400),
-              ),
-            ),
-            Container(
-              width: 52,
-              height: 2,
-              color: isSelect ? Colors.white : null,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
 class ViewTop extends StatelessWidget {
+  final SignInBloc bloc;
+
+  const ViewTop({Key key, this.bloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        HeaderView()
+        HeaderView(bloc: bloc,),
+        ViewSignIn()
       ],
     );
   }
 }
 
+class ViewSignIn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+    );
+  }
+}
+
+class ViewSignUp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.indigo,
+    );
+  }
+}
 
 // ignore: must_be_immutable
 class SignInForm extends StatelessWidget {
